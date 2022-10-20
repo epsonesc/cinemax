@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)http://127.0.0.1:5500/Sinema%20Rezervasyon.html -->
+<html lang="tr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinema Rezervasyon</title>
+    <style>
+        body{
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            
+        }
+        #row {
+            display: flex;
+            
+        }
+        .seat{
+            width: 30px;
+            height: 30px;
+            background-color: #292929;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        .seat:nth-of-type(2){
+            margin-right: 45px;
+        }
+        .seat:nth-last-of-type(3){
+            margin-left: 45px;
+        }
+        .seat.selected{
+            background-color: yellow;
+        }
+        .seat.reserved{
+            background-color: white;
+        }
+        #movie {
+            margin-top: 25px;
+            
+        }
+        #fılm {
+            text-align: center;
+            font-size: 20px;
+        }
+        #screen{
+            width: 100%;
+            height: 55px;
+            background-color: white;
+            margin: 20px 0;
+            box-shadow: 0 3px 8px rgba(255, 255, 255, 0.7);
+        }
+        #info{
+            color: white;
+            display: flex;
+            padding: 5px 10px;
+        }
+        #info li {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 10px;
+        }
+        #buton {
+            width: 100px;
+            font-size: 20px;
+            color: black;
+            background-color: white;
+            height: 75px;
+        }
+        #son {
+            color: white;
+            font-size: 20px;
+        }
+        .text {
+            font-size: 25px;
+            color: white;
+        }
+        span {
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="screen"></div>
+        <div id="row">
+            <div class="seat reserved"></div>
+            <div class="seat reserved"></div>
+            <div class="seat selected"></div>
+            <div class="seat selected"></div>
+            <div class="seat "></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div id="row">
+            <div class="seat reserved"></div>
+            <div class="seat reserved"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div id="row">
+            <div class="seat reserved"></div>
+            <div class="seat reserved"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div id="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div id="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+    </div>
+    <div id="movie">
+        <select id="fılm">
+            <option value="80">Shutter Island </option>
+            <option value="65">Only Lovers Left Alive</option>
+            <option value="70">Joker</option>
+        </select>
+    </div>
+    <ul id="info">
+        <li>
+            <div class="seat selected"></div>
+            <small>Seçili Koltuk</small>
+        </li>
+        <li>
+            <div class="seat"></div>
+            <small>Boş</small>
+        </li>
+        <li>
+            <div class="seat reserved"></div>
+            <small>Dolu Koltuk</small>
+        </li>
+    </ul><br><br>
+    
+    <p class="text">
+        <span id="count">2</span> Koltuk İçin Ödenecek Toplam Ücret : <span id="amount">140</span>
+    </p>
+
+    <script>
+        var contain=document.querySelector("#container");
+        var i;
+        var mof;
+        var toplam;
+        var count=document.getElementById("count");
+        var amount=document.getElementById("amount");
+        var selec=document.getElementById("fılm");
+        contain.addEventListener("click",function(e){
+            if(e.target.classList.contains('seat') && !e.target.classList.contains('reserved')){
+                e.target.classList.toggle('selected');
+
+
+              let selCo= container.querySelectorAll('.seat.selected').length;
+               count.innerHTML=selCo;
+               calculateTotal();
+        
+            }
+
+            
+        });
+        selec.addEventListener("change",function(e){
+            calculateTotal();
+        });
+        function calculateTotal(){
+            let selCo= container.querySelectorAll('.seat.selected').length;
+            let price=selec.value;
+            count.innerHTML=selCo;
+            amount.innerHTML=selCo*price
+        }
+
+      
+
+           
+
+       
+          
+
+       
+        
+    </script>
+    
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
